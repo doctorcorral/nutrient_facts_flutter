@@ -37,6 +37,7 @@ Widget nutrientWidget({nutrientData}) {
         children: <Widget>[
           nutriHeader(calories: 23, servings: 3, servingSize: "8 oz."),
           nutrientValues(nutrientData: nutrientData),
+          vitaminValues(nutrientData: nutrientData),
           footerCalories(),
         ],
       ),
@@ -53,7 +54,6 @@ Widget nutrientValues({nutrientData}) {
     {"nutrient": "TRANSFAT", "name": "Trans Fat", "sub": true, "dly": null},
     {"nutrient": "CHOLE", "name": "Cholesterol", "sub": false, "dly": 300.0},
     {"nutrient": "NA", "name": "Sodium", "sub": false, "dly": 2400.0},
-    {"nutrient": "K", "name": "Potassium", "sub": false, "dly": 3500.0},
     {
       "nutrient": "CHOCDF",
       "name": "Total Carbohidrate",
@@ -63,11 +63,6 @@ Widget nutrientValues({nutrientData}) {
     {"nutrient": "FIBTG", "name": "Dietary Fiber", "sub": true, "dly": 25.0},
     {"nutrient": "SUGAR", "name": "Sugars", "sub": true, "dly": null},
     {"nutrient": "PROCNT", "name": "Protein", "sub": false, "dly": 50.0},
-    {"nutrient": "VITB6A", "name": "Vitamin B6", "sub": false, "dly": 2.0},
-    {"nutrient": "THIA", "name": "Thiamin", "sub": false, "dly": 1.5},
-    {"nutrient": "VITA_IU", "name": "Vitamin A", "sub": false, "dly": 5000},
-    {"nutrient": "VITD", "name": "Vitamin D", "sub": false, "dly": 400},
-    {"nutrient": "VITK1", "name": "Vitamin K ", "sub": false, "dly": 80},
   ];
 
   return Column(
@@ -81,6 +76,35 @@ Widget nutrientValues({nutrientData}) {
               unit: nutrientData["${d["nutrient"]}"]["unit"],
             ))
         .toList(),
+  );
+}
+
+Widget vitaminValues({nutrientData}) {
+  //final n = (1.3456).toStringAsFixed(2);
+  //final s = double.parse("1.2345");
+  final nutrientTypes = [
+    {"nutrient": "THIA", "name": "Thiamin", "sub": false, "dly": 1.5},
+    {"nutrient": "K", "name": "Potassium", "sub": false, "dly": 3500.0},
+    {"nutrient": "VITB6A", "name": "Vitamin B6", "sub": false, "dly": 2.0},
+    {"nutrient": "VITA_IU", "name": "Vitamin A", "sub": false, "dly": 5000},
+    {"nutrient": "VITD", "name": "Vitamin D", "sub": false, "dly": 400},
+    {"nutrient": "VITK1", "name": "Vitamin K ", "sub": false, "dly": 80},
+  ];
+  final vitaminLine = Container(
+      margin: EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
+      height: 4.0,
+      color: Colors.black);
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[vitaminLine] +
+        nutrientTypes
+            .map((d) => vitaminLiner(
+                  nutrientName: d["name"],
+                  qty: nutrientData["${d["nutrient"]}"]["amount"],
+                  ptg: nutrientData["${d["nutrient"]}"]["amount"],
+                  unit: nutrientData["${d["nutrient"]}"]["unit"],
+                ))
+            .toList(),
   );
 }
 
@@ -191,6 +215,53 @@ Widget nutrientLiner({
                 fontSize: textSize,
                 color: Colors.black,
                 fontWeight: textWeight1,
+              ),
+            )),
+          ],
+        )
+      ]));
+}
+
+Widget vitaminLiner({
+  @required nutrientName,
+  @required qty,
+  ptg,
+  showQty: false,
+  unit: "g",
+}) {
+  final textSize = 15.0;
+  final textWeight = FontWeight.w500;
+  return Container(
+      padding: EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
+      child: Column(children: <Widget>[
+        Container(
+            margin: EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
+            height: 1.0,
+            color: Colors.black),
+        Row(
+          children: <Widget>[
+            Text(
+              nutrientName,
+              style: TextStyle(
+                  fontSize: textSize,
+                  color: Colors.black,
+                  fontWeight: textWeight),
+            ),
+            Text(
+              (showQty) ? "  ${qty}${unit}" : "",
+              style: TextStyle(
+                  fontSize: textSize,
+                  color: Colors.black,
+                  fontWeight: textWeight),
+            ),
+            Expanded(
+                child: Text(
+              ((ptg != null) ? "${ptg}%" : ""),
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontSize: textSize,
+                color: Colors.black,
+                fontWeight: textWeight,
               ),
             )),
           ],

@@ -1,35 +1,8 @@
 import 'package:flutter/material.dart';
 
-final nutrientData = {
-  "CA": {"amount": 37.5, "unit": "mg"},
-  "CHOCDF": {"amount": 342.1, "unit": "g"},
-  "CHOLE": {"amount": 16.561, "unit": "mg"},
-  "ENERC_KCAL": {"amount": 2135.9, "unit": "kcal"},
-  "FAT": {"amount": 67.51, "unit": "g"},
-  "FE": {"amount": 18.2, "unit": "mg"},
-  "FIBTG": {"amount": 12.90, "unit": "g"},
-  "FOLAC": {"amount": 385.0, "unit": "mcg"},
-  "K": {"amount": 676.7, "unit": "mg"},
-  "MG": {"amount": 133.07, "unit": "mg"},
-  "NA": {"amount": 1038.89, "unit": "mg"},
-  "NIA": {"amount": 19.49, "unit": "mg"},
-  "P": {"amount": 381.19, "unit": "mg"},
-  "PROCNT": {"amount": 35.99, "unit": "g"},
-  "RIBF": {"amount": 1.6, "unit": "mg"},
-  "SE": {"amount": 84.75, "unit": "mcg"},
-  "SUGAR": {"amount": 74.49, "unit": "g"},
-  "THIA": {"amount": 2.74, "unit": "mg"},
-  "VITA_IU": {"amount": 5.0, "unit": "IU"},
-  "VITB6A": {"amount": 0.11, "unit": "mg"},
-  "VITD": {"amount": 28.39, "unit": "IU"},
-  "VITK1": {"amount": 0.75, "unit": "mcg"},
-  "ZN": {"amount": 2.93, "unit": "mg"},
-  "SATFAT": {"amount": 4.2, "unit": "g"},
-  "TRANSFAT": {"amount": 4.2, "unit": "g"},
-  "FIBER": {"amount": 4.23456, "unit": "g"},
-};
-
 class NutritionFacts extends StatefulWidget {
+  final nutrientData;
+  NutritionFacts({@required this.nutrientData}) : assert(nutrientData != null);
   NutritionFactsState createState() =>
       NutritionFactsState(nutrientData: nutrientData);
 }
@@ -47,12 +20,12 @@ class NutritionFactsState extends State<NutritionFacts> {
         body: Container(
       padding: EdgeInsets.all(40.0),
       color: Colors.white,
-      child: nutrientWidget(),
+      child: nutrientWidget(nutrientData: nutrientData),
     ));
   }
 }
 
-Widget nutrientWidget() {
+Widget nutrientWidget({nutrientData}) {
   return Container(
     padding: EdgeInsets.all(1.0),
     decoration:
@@ -62,8 +35,8 @@ Widget nutrientWidget() {
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          nutriHeader(),
-          nutrientValues(),
+          nutriHeader(calories: 23, servings: 3, servingSize: "8 oz."),
+          nutrientValues(nutrientData: nutrientData),
           footerCalories(),
         ],
       ),
@@ -71,7 +44,7 @@ Widget nutrientWidget() {
   );
 }
 
-Widget nutrientValues() {
+Widget nutrientValues({nutrientData}) {
   //final n = (1.3456).toStringAsFixed(2);
   //final s = double.parse("1.2345");
   final nutrientTypes = [
@@ -80,15 +53,21 @@ Widget nutrientValues() {
     {"nutrient": "TRANSFAT", "name": "Trans Fat", "sub": true, "dly": null},
     {"nutrient": "CHOLE", "name": "Cholesterol", "sub": false, "dly": 300.0},
     {"nutrient": "NA", "name": "Sodium", "sub": false, "dly": 2400.0},
+    {"nutrient": "K", "name": "Potassium", "sub": false, "dly": 3500.0},
     {
       "nutrient": "CHOCDF",
       "name": "Total Carbohidrate",
       "sub": false,
-      "dly": 10.0,
+      "dly": 300.0,
     },
-    {"nutrient": "FIBER", "name": "Dietary Fiber", "sub": true, "dly": 10.0},
-    {"nutrient": "SUGAR", "name": "Sugars", "sub": true, "dly": 10.0},
-    {"nutrient": "PROCNT", "name": "Protein", "sub": false, "dly": 10.0}
+    {"nutrient": "FIBTG", "name": "Dietary Fiber", "sub": true, "dly": 25.0},
+    {"nutrient": "SUGAR", "name": "Sugars", "sub": true, "dly": null},
+    {"nutrient": "PROCNT", "name": "Protein", "sub": false, "dly": 50.0},
+    {"nutrient": "VITB6A", "name": "Vitamin B6", "sub": false, "dly": 2.0},
+    {"nutrient": "THIA", "name": "Thiamin", "sub": false, "dly": 1.5},
+    {"nutrient": "VITA_IU", "name": "Vitamin A", "sub": false, "dly": 5000},
+    {"nutrient": "VITD", "name": "Vitamin D", "sub": false, "dly": 400},
+    {"nutrient": "VITK1", "name": "Vitamin K ", "sub": false, "dly": 80},
   ];
 
   return Column(
@@ -105,7 +84,7 @@ Widget nutrientValues() {
   );
 }
 
-Widget nutriHeader() {
+Widget nutriHeader({calories, servingSize, servings}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -116,12 +95,12 @@ Widget nutriHeader() {
             color: Colors.black, fontSize: 40.0, fontWeight: FontWeight.w700),
       ),
       Text(
-        "Serving Size 8 oz",
+        "Serving Size $servingSize",
         style: TextStyle(
             fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w400),
       ),
       Text(
-        "Servings Per Container 1.5",
+        "Servings Per Container $servings",
         style: TextStyle(
             fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.w400),
       ),
@@ -142,12 +121,12 @@ Widget nutriHeader() {
       ),
       Row(children: <Widget>[
         Text(
-          "Calories ",
+          "Calories",
           style: TextStyle(
               fontSize: 15.0, color: Colors.black, fontWeight: FontWeight.w900),
         ),
         Text(
-          " 23",
+          " $calories",
           style: TextStyle(
               fontSize: 15.0, color: Colors.black, fontWeight: FontWeight.w500),
         ),

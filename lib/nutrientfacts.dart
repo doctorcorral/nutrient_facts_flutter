@@ -71,9 +71,14 @@ Widget nutrientValues({nutrientData}) {
         .map((d) => nutrientLiner(
               nutrientName: d["name"],
               qty: nutrientData["${d["nutrient"]}"]["amount"],
-              ptg: nutrientData["${d["nutrient"]}"]["amount"],
+              ptg: d["dly"] != null
+                  ? ((nutrientData["${d["nutrient"]}"]["amount"] * 100) /
+                          d["dly"])
+                      .toStringAsFixed(2)
+                  : "-",
               sub: d["sub"],
               unit: nutrientData["${d["nutrient"]}"]["unit"],
+              showp: d["dly"] != null ? true : false,
             ))
         .toList(),
   );
@@ -101,8 +106,13 @@ Widget vitaminValues({nutrientData}) {
             .map((d) => vitaminLiner(
                   nutrientName: d["name"],
                   qty: nutrientData["${d["nutrient"]}"]["amount"],
-                  ptg: nutrientData["${d["nutrient"]}"]["amount"],
+                  ptg: d["dly"] != null
+                      ? ((nutrientData["${d["nutrient"]}"]["amount"] * 100) /
+                              d["dly"])
+                          .toStringAsFixed(2)
+                      : "-",
                   unit: nutrientData["${d["nutrient"]}"]["unit"],
+                  showp: d["dly"] != null ? true : false,
                 ))
             .toList(),
   );
@@ -178,6 +188,7 @@ Widget nutrientLiner({
   ptg,
   sub: false,
   unit: "g",
+  showp: true,
 }) {
   final textSize = 15.0;
   final textWeight1 = FontWeight.w900;
@@ -209,7 +220,7 @@ Widget nutrientLiner({
             ),
             Expanded(
                 child: Text(
-              ((ptg != null) ? "${ptg}%" : ""),
+              (((ptg == null) || !showp) ? "" : "${ptg}%"),
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: textSize,
@@ -228,6 +239,7 @@ Widget vitaminLiner({
   ptg,
   showQty: false,
   unit: "g",
+  showp: true,
 }) {
   final textSize = 15.0;
   final textWeight = FontWeight.w500;
@@ -256,7 +268,7 @@ Widget vitaminLiner({
             ),
             Expanded(
                 child: Text(
-              ((ptg != null) ? "${ptg}%" : ""),
+              (((ptg == null) || !showp) ? "" : "${ptg}%"),
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: textSize,

@@ -1,4 +1,4 @@
-final macroNutrientTypes = [
+final List<Map<String, dynamic>> macroNutrientTypes = [
   {
     "nutrient": "FAT",
     "name": "Total Fat",
@@ -55,7 +55,7 @@ final macroNutrientTypes = [
   },
 ];
 
-final vitaminTypes = [
+final List<Map<String, dynamic>> vitaminTypes = [
   {
     "nutrient": "THIA",
     "name": "Thiamin",

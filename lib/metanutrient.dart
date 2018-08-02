@@ -54,3 +54,42 @@ final macroNutrientTypes = [
     "dly": {"male": 50.0, "felame": 50.0}
   },
 ];
+
+final vitaminTypes = [
+  {
+    "nutrient": "THIA",
+    "name": "Thiamin",
+    "sub": false,
+    "dly": {"male": 1.5, "felame": 1.5}
+  },
+  {
+    "nutrient": "K",
+    "name": "Potassium",
+    "sub": false,
+    "dly": {"male": 3500.0, "felame": 3500.0}
+  },
+  {
+    "nutrient": "VITB6A",
+    "name": "Vitamin B6",
+    "sub": false,
+    "dly": {"male": 2.0, "felame": 2.0}
+  },
+  {
+    "nutrient": "VITA_IU",
+    "name": "Vitamin A",
+    "sub": false,
+    "dly": {"male": 5000, "felame": 5000}
+  },
+  {
+    "nutrient": "VITD",
+    "name": "Vitamin D",
+    "sub": false,
+    "dly": {"male": 400, "felame": 400}
+  },
+  {
+    "nutrient": "VITK1",
+    "name": "Vitamin K ",
+    "sub": false,
+    "dly": {"male": 80, "felame": 80}
+  },
+];

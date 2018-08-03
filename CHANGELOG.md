@@ -1,3 +1,10 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.6]
+* Meta data nutrient infromation moved to MetaDataNutrient class
 
-* TODO: Describe initial release.
+## [0.0.4] 
+
+* Fully operational Widget
+
+## [0.0.1] 
+
+* Initual layout made

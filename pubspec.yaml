@@ -1,10 +1,11 @@
 name: nutrientfacts
 description: Widget for rendering Nutrition Fact labels.
-version: 0.0.2
+version: 0.0.6
 author: Ricardo Corral Corral <ricardo@suggestic.com>
 homepage: http://suggestic.com
 
 dependencies:
+  carousel_slider: ^0.0.6
   flutter:
     sdk: flutter
 

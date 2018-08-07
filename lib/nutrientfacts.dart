@@ -272,7 +272,7 @@ Widget footerCalories({caloriesNum: 2000}) {
           color: Colors.black,
         ),
         Text(
-          "Percent Daily Values are based on a ${caloriesNum} calories diet.",
+          "*Percent Daily Values are based on a ${caloriesNum} calories diet.",
           style: TextStyle(
               fontSize: 10.0, color: Colors.black, fontWeight: FontWeight.w400),
         )

@@ -1,3 +1,6 @@
+## [0.0.7]
+* Added support for Dart 2
+
 ## [0.0.6]
 * Meta data nutrient infromation moved to MetaDataNutrient class
 
